@@ -1,0 +1,37 @@
+<style>
+.board {
+  display: grid;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.field {
+    padding: 5px;
+    margin: 1px 1px;
+    background-color: #42f24a;
+}
+
+.wall {
+    background-color: #800000;
+}
+
+.road {
+    background-color: #e60000;
+}
+</style>
+
+<div class="board">
+{% for row in board %}
+    <div class="row">
+    {% for field in row %}
+        <div class="field
+            {% if field == 'w'%}wall{% endif %}
+            {% if field != ' ' and field != 'w' %}road{% endif %}
+            "></div>
+    {% endfor %}
+    </div>
+{% endfor %}
+</div>
