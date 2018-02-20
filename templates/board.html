@@ -1,3 +1,19 @@
+<html>
+
+<head>
+<title>Map of world</title>
+</head>
+
+<body>
+<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="js/cosmos.js"></script>
+<script type="text/javascript">
+var timerId;
+</script>
+
+<span style="cursor: pointer; text-decoration: underline" onclick="timerId = setInterval( makeRequest, 1000, '/json')">Start</span>
+<span style="cursor: pointer; text-decoration: underline" onclick="clearInterval( timerId )">Stop</span>
+
 <style>
 .board {
   display: grid;
@@ -9,17 +25,29 @@
 }
 
 .field {
-    padding: 5px;
-    margin: 1px 1px;
-    background-color: #42f24a;
+    padding: 5px 3px;
+    margin: 1px 0px;
+    background-color: lime;
 }
 
 .wall {
-    background-color: #800000;
+    background-color: black;
 }
 
 .road {
-    background-color: #e60000;
+    background-color: maroon;
+}
+
+.port {
+    background-color: blue;
+}
+
+.init {
+    background-color: navy;
+}
+
+.person {
+    background-color: fuchsia;
 }
 </style>
 
@@ -28,10 +56,16 @@
     <div class="row">
     {% for field in row %}
         <div class="field
-            {% if field == 'w'%}wall{% endif %}
-            {% if field != ' ' and field != 'w' %}road{% endif %}
+            {% if field.lower() == 'w' %}wall{% endif %}
+            {% if field.lower() == 'r' %}road{% endif %}
+            {% if field.lower() == 'p' %}port{% endif %}
+            {% if field.lower() == 'i' %}init{% endif %}
+            {% if field != field.lower() %}person{% endif %}
             "></div>
     {% endfor %}
     </div>
 {% endfor %}
 </div>
+
+</body>
+</html>
